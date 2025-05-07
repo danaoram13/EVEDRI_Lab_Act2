@@ -134,6 +134,8 @@ namespace EVEDRI_Lab_Act2
 
             //focus to name field
             txtName.Focus();
+            // if fields empty
+            //Message box show: Error, Missing Fields You need to fill up all the empty fields
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)
