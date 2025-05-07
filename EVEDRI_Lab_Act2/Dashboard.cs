@@ -30,7 +30,6 @@ namespace EVEDRI_Lab_Act2
             lblBscsCount.Text = showcount(12, "BSCS").ToString();
             lblBscpeCount.Text = showcount(12, "BSCpE").ToString();
 
-
         }
         public int showcount(int m, string val)
         {
