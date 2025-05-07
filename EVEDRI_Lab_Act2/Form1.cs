@@ -58,6 +58,12 @@ namespace EVEDRI_Lab_Act2
                 hobby += chkSoccer.Text + ", ";
             }
 
+            if (IsUsernameAndPasswordExist(txtUsername.Text, txtPassword.Text))
+            {
+                MessageBox.Show("Username/Password already exist. Please choose a different one.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string favColor = cmbFavColor.Text;
 
             string saying = txtSaying.Text;
@@ -189,6 +195,11 @@ namespace EVEDRI_Lab_Act2
                 hobby += chkSoccer.Text + ", ";
             }
 
+            if (IsUsernameAndPasswordExist(txtUsername.Text, txtPassword.Text))
+            {
+                MessageBox.Show("Username/Password already exist. Please choose a different one.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string favColor = cmbFavColor.Text;
 
             string saying = txtSaying.Text;
@@ -308,6 +319,25 @@ namespace EVEDRI_Lab_Act2
             {
                 txtProfile.Text = openFileDialog.FileName;
             }
+        }
+
+        private bool IsUsernameAndPasswordExist(string username, string password)
+        {
+            Workbook book = new Workbook();
+            book.LoadFromFile(@"C:\Users\GUSTAV\Desktop\Projects\mec\Spam\Manriquez\Book1.xlsx");
+
+            Worksheet sh = book.Worksheets[0];
+            DataTable dt = sh.ExportDataTable();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["Username"].ToString() == username && row["Password"].ToString() == password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
