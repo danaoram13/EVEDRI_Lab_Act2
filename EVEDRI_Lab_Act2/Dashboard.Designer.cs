@@ -126,6 +126,7 @@
             this.btnLogs.TabIndex = 2;
             this.btnLogs.Text = "Logs";
             this.btnLogs.UseVisualStyleBackColor = false;
+            this.btnLogs.Click += new System.EventHandler(this.btnLogs_Click);
             // 
             // btnInactive
             // 
@@ -138,6 +139,7 @@
             this.btnInactive.TabIndex = 2;
             this.btnInactive.Text = "Inactive \r\nStudents";
             this.btnInactive.UseVisualStyleBackColor = false;
+            this.btnInactive.Click += new System.EventHandler(this.btnInactive_Click);
             // 
             // btnActive
             // 
@@ -150,6 +152,7 @@
             this.btnActive.TabIndex = 2;
             this.btnActive.Text = "Active \r\nStudents";
             this.btnActive.UseVisualStyleBackColor = false;
+            this.btnActive.Click += new System.EventHandler(this.btnActive_Click);
             // 
             // lblDash
             // 
@@ -614,7 +617,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnLogs;
         private System.Windows.Forms.Button btnInactive;
@@ -656,5 +658,6 @@
         private System.Windows.Forms.Label lblBscsCount;
         private System.Windows.Forms.Label lblBsCpe;
         private System.Windows.Forms.Label lblBscs;
+        public System.Windows.Forms.PictureBox pictureBox1;
     }
 }

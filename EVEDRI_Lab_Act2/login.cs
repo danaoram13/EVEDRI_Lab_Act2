@@ -15,7 +15,10 @@ namespace EVEDRI_Lab_Act2
 {
     public partial class login : Form
     {
+       
+        logs Logs = new logs();
 
+        Dashboard dashboard = new Dashboard();
         public login()
         {
             InitializeComponent();
@@ -49,6 +52,12 @@ namespace EVEDRI_Lab_Act2
                 if (sheet.Range[i, 9].Value == txtUsername.Text &&
                     sheet.Range[i, 10].Value == txtPassword.Text)
                 {
+                    Logs.insertLogs(txtUsername.Text, "Successfully Added!");
+
+                    dashboard.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                    dashboard.pictureBox1.Image = Image.FromFile(@"" + sheet.Range[i, 14].Value);
+                   
                     log = true;
                     break;
                 }

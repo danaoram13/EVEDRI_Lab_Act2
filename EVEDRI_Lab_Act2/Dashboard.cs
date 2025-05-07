@@ -29,8 +29,6 @@ namespace EVEDRI_Lab_Act2
             lblBsitCount.Text = showcount(12, "BSIT").ToString();
             lblBscsCount.Text = showcount(12, "BSCS").ToString();
             lblBscpeCount.Text = showcount(12, "BSCpE").ToString();
-
-
         }
         public int showcount(int m, string val)
         {
@@ -67,6 +65,61 @@ namespace EVEDRI_Lab_Act2
             {
                 Application.Exit();
             }
+        }
+
+        private void btnActive_Click(object sender, EventArgs e)
+        {
+            var f2 = new Form2();
+            Workbook book = new Workbook();
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            Worksheet sh = book.Worksheets[0];
+
+            DataTable dt = sh.ExportDataTable();
+            DataTable filtered = dt.Clone();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[14].ToString() == "1") 
+                {
+                    filtered.ImportRow(row);
+                }
+            }
+
+
+
+            f2.dataGridView1.DataSource = filtered;
+            f2.Show();
+        }
+
+        private void btnInactive_Click(object sender, EventArgs e)
+        {
+            var f2 = new Form2();
+            Workbook book = new Workbook();
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            Worksheet sh = book.Worksheets[0];
+
+            DataTable dt = sh.ExportDataTable();
+            DataTable filtered = dt.Clone();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[14].ToString() == "0") 
+                {
+                    filtered.ImportRow(row);
+                }
+            }
+
+
+
+            f2.dataGridView1.DataSource = filtered;
+            f2.Show();
+        }
+
+        private void btnLogs_Click(object sender, EventArgs e)
+        {
+            var f2 = new Form2();
+            ShowLogs(f2.dataGridView1);
+            f2.Show();
         }
     }
 }

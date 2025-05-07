@@ -74,6 +74,8 @@ namespace EVEDRI_Lab_Act2
 
             string course = cmbCourse.Text;
 
+            string pic = txtProfile.Text;
+
             //UNSURE OF THIS
             string bday = dateTimePicker1.Text;
 
@@ -97,8 +99,9 @@ namespace EVEDRI_Lab_Act2
             sheet.Range[row, 10].Value = password;
             sheet.Range[row, 11].Value = saying;
             sheet.Range[row, 12].Value = course;
-            
-            /*sheet.Range[row, 13].Value = "1";*/
+
+            sheet.Range[row, 13].Value = pic;
+
             //UNSURE OF THIS
             sheet.Range[row, 14].Value = "1";
 
@@ -273,8 +276,18 @@ namespace EVEDRI_Lab_Act2
             txtAge.Clear();
             cmbCourse.SelectedIndex = -1;
 
+            //UNSURE OF THIS
+            dateTimePicker1.Text = string.Empty;
+
+            txtUsername.Clear();
+            txtPassword.Clear();
+            txtAddress.Clear();
+            txtEmail.Clear();
+            txtProfile.Clear();
+
             //focus to name field
-            txtName.Focus();
+            txtName.Focus();          
+
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
