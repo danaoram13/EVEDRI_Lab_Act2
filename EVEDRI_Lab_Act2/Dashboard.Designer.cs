@@ -74,7 +74,7 @@
             this.lblBscs = new System.Windows.Forms.Label();
             this.lblBsitCount = new System.Windows.Forms.Label();
             this.lblBsit = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddStudent = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -90,7 +90,7 @@
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnAddStudent);
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnLogs);
             this.panel1.Controls.Add(this.btnInactive);
@@ -109,7 +109,7 @@
             this.btnLogOut.BackColor = System.Drawing.Color.Transparent;
             this.btnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogOut.Location = new System.Drawing.Point(47, 540);
+            this.btnLogOut.Location = new System.Drawing.Point(47, 539);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(120, 35);
             this.btnLogOut.TabIndex = 2;
@@ -122,7 +122,7 @@
             this.btnLogs.BackColor = System.Drawing.Color.Transparent;
             this.btnLogs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogs.Location = new System.Drawing.Point(47, 488);
+            this.btnLogs.Location = new System.Drawing.Point(47, 490);
             this.btnLogs.Name = "btnLogs";
             this.btnLogs.Size = new System.Drawing.Size(120, 35);
             this.btnLogs.TabIndex = 2;
@@ -135,7 +135,7 @@
             this.btnInactive.BackColor = System.Drawing.Color.Transparent;
             this.btnInactive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnInactive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInactive.Location = new System.Drawing.Point(47, 417);
+            this.btnInactive.Location = new System.Drawing.Point(47, 422);
             this.btnInactive.Name = "btnInactive";
             this.btnInactive.Size = new System.Drawing.Size(120, 54);
             this.btnInactive.TabIndex = 2;
@@ -148,7 +148,7 @@
             this.btnActive.BackColor = System.Drawing.Color.Transparent;
             this.btnActive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActive.Location = new System.Drawing.Point(47, 353);
+            this.btnActive.Location = new System.Drawing.Point(47, 361);
             this.btnActive.Name = "btnActive";
             this.btnActive.Size = new System.Drawing.Size(120, 47);
             this.btnActive.TabIndex = 2;
@@ -161,7 +161,7 @@
             this.lblDash.AutoSize = true;
             this.lblDash.BackColor = System.Drawing.Color.Transparent;
             this.lblDash.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDash.Location = new System.Drawing.Point(64, 281);
+            this.lblDash.Location = new System.Drawing.Point(64, 261);
             this.lblDash.Name = "lblDash";
             this.lblDash.Size = new System.Drawing.Size(90, 18);
             this.lblDash.TabIndex = 1;
@@ -172,7 +172,7 @@
             this.lblDate.AutoSize = true;
             this.lblDate.BackColor = System.Drawing.Color.Transparent;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(87, 226);
+            this.lblDate.Location = new System.Drawing.Point(87, 218);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(39, 18);
             this.lblDate.TabIndex = 1;
@@ -576,14 +576,17 @@
             this.lblBsit.TabIndex = 1;
             this.lblBsit.Text = "BSIT";
             // 
-            // button1
+            // btnAddStudent
             // 
-            this.button1.Location = new System.Drawing.Point(67, 324);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddStudent.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddStudent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddStudent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddStudent.Location = new System.Drawing.Point(47, 300);
+            this.btnAddStudent.Name = "btnAddStudent";
+            this.btnAddStudent.Size = new System.Drawing.Size(120, 47);
+            this.btnAddStudent.TabIndex = 2;
+            this.btnAddStudent.Text = "Add Student";
+            this.btnAddStudent.UseVisualStyleBackColor = false;
             // 
             // Dashboard
             // 
@@ -670,6 +673,6 @@
         private System.Windows.Forms.Label lblBsCpe;
         private System.Windows.Forms.Label lblBscs;
         public System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddStudent;
     }
 }

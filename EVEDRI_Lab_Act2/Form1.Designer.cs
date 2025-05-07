@@ -63,6 +63,7 @@
             this.lblProfile = new System.Windows.Forms.Label();
             this.cmbCourse = new System.Windows.Forms.ComboBox();
             this.lblCourse = new System.Windows.Forms.Label();
+            this.btnBacktoDashboard = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblName
@@ -436,6 +437,16 @@
             this.lblCourse.TabIndex = 23;
             this.lblCourse.Text = "Course:";
             // 
+            // btnBacktoDashboard
+            // 
+            this.btnBacktoDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBacktoDashboard.Location = new System.Drawing.Point(12, 12);
+            this.btnBacktoDashboard.Name = "btnBacktoDashboard";
+            this.btnBacktoDashboard.Size = new System.Drawing.Size(109, 31);
+            this.btnBacktoDashboard.TabIndex = 24;
+            this.btnBacktoDashboard.Text = "Back";
+            this.btnBacktoDashboard.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +454,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Controls.Add(this.btnBacktoDashboard);
             this.Controls.Add(this.lblCourse);
             this.Controls.Add(this.cmbCourse);
             this.Controls.Add(this.lblProfile);
@@ -522,6 +534,7 @@
         private System.Windows.Forms.Label lblProfile;
         private System.Windows.Forms.ComboBox cmbCourse;
         private System.Windows.Forms.Label lblCourse;
+        private System.Windows.Forms.Button btnBacktoDashboard;
     }
 }
 
