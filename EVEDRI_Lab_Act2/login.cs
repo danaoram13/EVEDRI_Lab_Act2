@@ -39,7 +39,7 @@ namespace EVEDRI_Lab_Act2
 
 
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
             int row = sheet.Rows.Length;
@@ -56,7 +56,7 @@ namespace EVEDRI_Lab_Act2
 
                     dashboard.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                    dashboard.pictureBox1.Image = Image.FromFile(@"" + sheet.Range[i, 14].Value);
+                   /* dashboard.pictureBox1.Image = Image.FromFile(@"" + sheet.Range[i, 13].Value);*/
                    
                     log = true;
                     break;
@@ -68,17 +68,17 @@ namespace EVEDRI_Lab_Act2
             {
                 MessageBox.Show("Log In Success", "Welcome" ,MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-                /* Dashboard dashboard = new Dashboard();
-                 this.Hide();
-                 dashboard.ShowDialog();*/
+                Dashboard dashboard = new Dashboard();
+                this.Hide();
+                dashboard.ShowDialog();
 
                 /*Form1 form = new Form1();
                 *this.Hide();
                 form.ShowDialog();*/
 
-                Form2 form = new Form2();
+                /*Form2 form = new Form2();
                 this.Hide();
-                form.ShowDialog();
+                form.ShowDialog();*/
             }
             else
             {
@@ -123,6 +123,15 @@ namespace EVEDRI_Lab_Act2
             txtPassword.Clear();
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -87,7 +87,7 @@ namespace EVEDRI_Lab_Act2
 
             Workbook book = new Workbook();
 
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
 
@@ -111,7 +111,7 @@ namespace EVEDRI_Lab_Act2
             //UNSURE OF THIS
             sheet.Range[row, 14].Value = "1";
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+            book.SaveToFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
 
             DataTable dt = sheet.ExportDataTable();
 
@@ -235,7 +235,7 @@ namespace EVEDRI_Lab_Act2
 
             Workbook book = new Workbook();
 
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
 
@@ -269,7 +269,7 @@ namespace EVEDRI_Lab_Act2
             
             sheet.Range[row, 14].Value = "1";
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+            book.SaveToFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
 
             DataTable dt = sheet.ExportDataTable();
 
@@ -338,6 +338,13 @@ namespace EVEDRI_Lab_Act2
             }
 
             return false;
+        }
+
+        private void btnBacktoDashboard_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            this.Hide();
+            dashboard.ShowDialog();
         }
     }
 }

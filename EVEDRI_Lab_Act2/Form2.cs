@@ -27,7 +27,7 @@ namespace EVEDRI_Lab_Act2
         public void LoadExcelFile() 
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
             DataTable dt = sheet.ExportDataTable();
@@ -175,9 +175,9 @@ namespace EVEDRI_Lab_Act2
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+            Dashboard dashboard = new Dashboard();
             this.Hide();
-            form1.ShowDialog();
+            dashboard.ShowDialog();
         }
 
       

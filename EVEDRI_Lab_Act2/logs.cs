@@ -13,7 +13,7 @@ namespace EVEDRI_Lab_Act2
 
         public void insertLogs(string user, string message)
         {          
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sh = book.Worksheets[1];
             int r = sh.Rows.Length;

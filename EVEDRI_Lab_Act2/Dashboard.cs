@@ -33,7 +33,7 @@ namespace EVEDRI_Lab_Act2
         public int showcount(int m, string val)
         {
             Workbook workbook = new Workbook();
-            workbook.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            workbook.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = workbook.Worksheets[0];
             int r = sheet.Rows.Length;
             int count = 0;
@@ -51,7 +51,7 @@ namespace EVEDRI_Lab_Act2
         public void ShowLogs(DataGridView D)
         {
             Workbook workbook = new Workbook();
-            workbook.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            workbook.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = workbook.Worksheets[1];
             DataTable dt = sheet.ExportDataTable();
             D.DataSource = dt;
@@ -63,15 +63,20 @@ namespace EVEDRI_Lab_Act2
             Exit = MessageBox.Show("Are you sure you want to exit?", "EXIT", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Exit == DialogResult.Yes)
             {
-                Application.Exit();
+                login login = new login();
+                this.Close();
+                login.Show();
+                /*Application.Exit();*/
             }
+            /*login login = new login();
+            login.Show();*/
         }
 
         private void btnActive_Click(object sender, EventArgs e)
         {
             var f2 = new Form2();
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sh = book.Worksheets[0];
 
             DataTable dt = sh.ExportDataTable();
@@ -95,7 +100,7 @@ namespace EVEDRI_Lab_Act2
         {
             var f2 = new Form2();
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\Downloads\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sh = book.Worksheets[0];
 
             DataTable dt = sh.ExportDataTable();
@@ -120,6 +125,13 @@ namespace EVEDRI_Lab_Act2
             var f2 = new Form2();
             ShowLogs(f2.dataGridView1);
             f2.Show();
+        }
+
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            this.Hide();
+            form.ShowDialog();
         }
     }
 }
