@@ -439,13 +439,16 @@
             // 
             // btnBacktoDashboard
             // 
+            this.btnBacktoDashboard.BackColor = System.Drawing.Color.Transparent;
+            this.btnBacktoDashboard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBacktoDashboard.BackgroundImage")));
+            this.btnBacktoDashboard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnBacktoDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBacktoDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBacktoDashboard.Location = new System.Drawing.Point(12, 12);
             this.btnBacktoDashboard.Name = "btnBacktoDashboard";
-            this.btnBacktoDashboard.Size = new System.Drawing.Size(64, 31);
+            this.btnBacktoDashboard.Size = new System.Drawing.Size(41, 23);
             this.btnBacktoDashboard.TabIndex = 24;
-            this.btnBacktoDashboard.Text = "Back";
-            this.btnBacktoDashboard.UseVisualStyleBackColor = true;
+            this.btnBacktoDashboard.UseVisualStyleBackColor = false;
             this.btnBacktoDashboard.Click += new System.EventHandler(this.btnBacktoDashboard_Click);
             // 
             // Form1

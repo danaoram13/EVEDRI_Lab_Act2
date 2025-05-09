@@ -14,7 +14,7 @@ namespace EVEDRI_Lab_Act2
 {
     public partial class Form1 : Form
     {
-        
+
         Form2 form2 = new Form2();
 
         public Form1()
@@ -24,16 +24,16 @@ namespace EVEDRI_Lab_Act2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;         
+            string name = txtName.Text;
 
-                //data += txtName.Text + ", ";
-                string gender = "";
+            //data += txtName.Text + ", ";
+            string gender = "";
 
             if (rdoMale.Checked)
             {
                 //string male = rdoMale.Checked;
 
-               gender = rdoMale.Text;
+                gender = rdoMale.Text;
             }
 
             if (rdoFemale.Checked)
@@ -95,7 +95,7 @@ namespace EVEDRI_Lab_Act2
 
             sheet.Range[row, 1].Value = name;
             sheet.Range[row, 2].Value = gender;
-            sheet.Range[row, 3].Value = hobby;         
+            sheet.Range[row, 3].Value = hobby;
             sheet.Range[row, 4].Value = favColor;
             sheet.Range[row, 5].Value = address;
             sheet.Range[row, 6].Value = email;
@@ -142,6 +142,29 @@ namespace EVEDRI_Lab_Act2
             txtName.Focus();
             // if fields empty
             //Message box show: Error, Missing Fields You need to fill up all the empty fields
+
+            if (txtName.Text == "" || txtAge.Text == "" || cmbCourse.Text == "" || rdoFemale.Checked == false && rdoMale.Checked == false || cmbFavColor.Text == "" ||
+                chkBasketball.Checked == false && chkVolleyball.Checked == false && chkSoccer.Checked == false || cmbCourse.Text == ""
+                || txtSaying.Text == "" || dateTimePicker1.Text == "" || txtUsername.Text == "" || txtPassword.Text == "" || txtAddress.Text == "" || txtEmail.Text == "" || txtProfile.Text == "")
+            {
+                MessageBox.Show("Error, Missing Fields You need to fill up all the empty fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtName.Text.Any(char.IsDigit)) 
+            {
+                MessageBox.Show("Error, you can't put numbers in your name, No Numbers allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(txtSaying.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Error, you can't put numbers in your saying, No Numbers allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(txtAge.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("Error, you can't put letters in your age, No Letters allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)

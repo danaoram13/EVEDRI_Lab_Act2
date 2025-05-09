@@ -125,13 +125,10 @@ namespace EVEDRI_Lab_Act2
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
-        private void login_Load(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }
 
