@@ -36,6 +36,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,6 +84,7 @@
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Visible = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnSearch
@@ -119,6 +121,19 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnAddNew
+            // 
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNew.Location = new System.Drawing.Point(761, 511);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(109, 31);
+            this.btnAddNew.TabIndex = 7;
+            this.btnAddNew.Text = "Add New";
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Visible = false;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -126,6 +141,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnSearch);
@@ -152,5 +168,6 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnBack;
         public System.Windows.Forms.Button btnDeleteAll;
+        public System.Windows.Forms.Button btnAddNew;
     }
 }

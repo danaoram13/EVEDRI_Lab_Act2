@@ -533,12 +533,12 @@
         public System.Windows.Forms.TextBox txtUsername;
         public System.Windows.Forms.TextBox txtPassword;
         public System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox txtProfile;
         private System.Windows.Forms.Button btnBrowsee;
         private System.Windows.Forms.Label lblProfile;
-        private System.Windows.Forms.ComboBox cmbCourse;
         private System.Windows.Forms.Label lblCourse;
         private System.Windows.Forms.Button btnBacktoDashboard;
+        public System.Windows.Forms.TextBox txtProfile;
+        public System.Windows.Forms.ComboBox cmbCourse;
     }
 }
 

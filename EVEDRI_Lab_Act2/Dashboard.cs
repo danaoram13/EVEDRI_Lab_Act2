@@ -142,55 +142,59 @@ namespace EVEDRI_Lab_Act2
 
         private void btnActive_Click(object sender, EventArgs e)
         {
-            
-            var f2 = new Form2(this);
-
-            f2.btnDeleteAll.Visible = false;
-
+            // Load Excel file
             Workbook book = new Workbook();
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
-            Worksheet sh = book.Worksheets[0];
+            Worksheet sheet = book.Worksheets[0];
 
-            /*DataTable dt = sh.ExportDataTable();*/
-            DataTable dt = sh.ExportDataTable(sh.AllocatedRange, true, true);
+            // Export data table with headers
+            DataTable dt = sheet.ExportDataTable(sheet.AllocatedRange, true, true);
+            DataTable activeStudents = dt.Clone(); // same structure
 
-            DataTable filtered = dt.Clone();
-
+            // Filter for active students (assuming 14th column is status)
             foreach (DataRow row in dt.Rows)
             {
-                if (dt.Columns.Count > 14 && row[14].ToString().Trim() == "1")
+                if (dt.Columns.Count > 13 && row[13].ToString().Trim() == "1")
                 {
-                    filtered.ImportRow(row);
+                    activeStudents.ImportRow(row);
                 }
             }
 
-            f2.dataGridView1.DataSource = filtered;
+            // Open Form2 and show filtered data
+            Form2 f2 = new Form2(this);
+            f2.dataGridView1.DataSource = activeStudents;
             f2.Show();
+            f2.btnAddNew.Visible = true;
             this.Hide();
+
         }
 
         private void btnInactive_Click(object sender, EventArgs e)
         {
-            var f2 = new Form2(this);
+           
+            // Load Excel file
             Workbook book = new Workbook();
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
-            Worksheet sh = book.Worksheets[0];
+            Worksheet sheet = book.Worksheets[0];
 
-            DataTable dt = sh.ExportDataTable();
-            DataTable filtered = dt.Clone();
+            // Export data table with headers
+            DataTable dt = sheet.ExportDataTable(sheet.AllocatedRange, true, true);
+            DataTable activeStudents = dt.Clone(); // same structure
 
+            // Filter for active students (assuming 14th column is status)
             foreach (DataRow row in dt.Rows)
             {
-                if (dt.Columns.Count > 14 && row[14].ToString().Trim() == "0")
+                if (dt.Columns.Count > 13 && row[13].ToString().Trim() == "0")
                 {
-                    filtered.ImportRow(row);
+                    activeStudents.ImportRow(row);
                 }
             }
 
-
-
-            f2.dataGridView1.DataSource = filtered;
+            // Open Form2 and show filtered data
+            Form2 f2 = new Form2(this);
+            f2.dataGridView1.DataSource = activeStudents;
             f2.Show();
+            this.Hide();
         }
 
         private void btnLogs_Click(object sender, EventArgs e)

@@ -115,7 +115,7 @@ namespace EVEDRI_Lab_Act2
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int r = dataGridView1.CurrentCell.RowIndex;
+            /*int r = dataGridView1.CurrentCell.RowIndex;
             Form1 form = (Form1)Application.OpenForms["Form1"];
             form.txtName.Text = dataGridView1.Rows[r].Cells[0].Value.ToString();
             string gender = dataGridView1.Rows[r].Cells[1].Value.ToString();
@@ -155,7 +155,41 @@ namespace EVEDRI_Lab_Act2
             form.txtSaying.Text = dataGridView1.Rows[r].Cells[10].Value.ToString();
 
             form.btnAdd.Visible = false;
-            form.btnUpdate.Visible = true;
+            form.btnUpdate.Visible = true;*/
+
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                // Open Form1 and pass the data
+                Form1 form1 = new Form1(dashboard); // if dashboard is available
+                form1.txtName.Text = row.Cells[0].Value?.ToString();
+                string gender = row.Cells[1].Value?.ToString();
+                if (gender == "Male") form1.rdoMale.Checked = true;
+                else if (gender == "Female") form1.rdoFemale.Checked = true;
+
+                string hobbies = row.Cells[2].Value?.ToString();
+                form1.chkBasketball.Checked = hobbies.Contains("Basketball");
+                form1.chkVolleyball.Checked = hobbies.Contains("Volleyball");
+                form1.chkSoccer.Checked = hobbies.Contains("Soccer");
+
+                form1.cmbFavColor.Text = row.Cells[3].Value?.ToString();
+                form1.txtAddress.Text = row.Cells[4].Value?.ToString();
+                form1.txtEmail.Text = row.Cells[5].Value?.ToString();
+                form1.dateTimePicker1.Text = row.Cells[6].Value?.ToString();
+                form1.txtAge.Text = row.Cells[7].Value?.ToString();
+                form1.txtUsername.Text = row.Cells[8].Value?.ToString();
+                form1.txtPassword.Text = row.Cells[9].Value?.ToString();
+                form1.txtSaying.Text = row.Cells[10].Value?.ToString();
+                form1.cmbCourse.Text = row.Cells[11].Value?.ToString();
+                form1.txtProfile.Text = row.Cells[12].Value?.ToString();
+
+                // Store the row index for updating (subtract header)
+                form1.Controls["lblId"].Text = e.RowIndex.ToString();
+
+                form1.Show();
+                this.Hide();
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -188,7 +222,13 @@ namespace EVEDRI_Lab_Act2
             dashboard.Show();
         }
 
-      
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1(dashboard);
+
+           form.Show();
+            
+        }
     }
 }
 

@@ -88,12 +88,18 @@ namespace EVEDRI_Lab_Act2
                 hobby += chkSoccer.Text + ", ";
             }
 
+
+
             if (IsUsernameAndPasswordExist(txtUsername.Text, txtPassword.Text))
             {
-                MessageBox.Show("Username/Password already exist. Please choose a different one.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username/Password already In Use. Please choose a different one.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            if (IsEmailExist(txtEmail.Text))
+            {
+                MessageBox.Show("Email already In use. Please use a different one.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string favColor = cmbFavColor.Text;
 
             string saying = txtSaying.Text;
@@ -175,6 +181,7 @@ namespace EVEDRI_Lab_Act2
             
             
         }
+
         private void RefreshDashboardData()
         {
             Workbook book = new Workbook();
@@ -227,14 +234,6 @@ namespace EVEDRI_Lab_Act2
             }
 
           
-           /* Dashboard dashboard = new Dashboard();
-            dashboard.lblActiveCount.Text = activeCount.ToString();
-            dashboard.lblInactiveCount.Text = inactiveCount.ToString();
-            dashboard.lblMaleCount.Text = maleCount.ToString();
-            dashboard.lblFemaleCount.Text = femaleCount.ToString();
-            dashboard.lblBasketCount.Text = basketballCount.ToString();
-            dashboard.lblVolleyCount.Text = volleyballCount.ToString();
-            dashboard.lblSoccerCount.Text = soccerCount.ToString();*/
         }
         private void btnDisplay_Click(object sender, EventArgs e)
         {            
@@ -286,6 +285,11 @@ namespace EVEDRI_Lab_Act2
             if (IsUsernameAndPasswordExist(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
             {
                 MessageBox.Show("Username/Password already exist. Choose a different one.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (IsEmailExist(txtEmail.Text.Trim()))
+            {
+                MessageBox.Show("Email already exists. Please use a different one.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -348,6 +352,7 @@ namespace EVEDRI_Lab_Act2
             form2.dataGridView1.DataSource = dt;
 
             // Success message
+       
             MessageBox.Show("Successfully updated!", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Reset all fields
@@ -392,19 +397,33 @@ namespace EVEDRI_Lab_Act2
         private bool IsUsernameAndPasswordExist(string username, string password)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\Desktop\Projects\mec\Spam\Manriquez\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            Worksheet sheet = book.Worksheets[0];
 
-            Worksheet sh = book.Worksheets[0];
-            DataTable dt = sh.ExportDataTable();
+            DataTable dt = sheet.ExportDataTable(sheet.AllocatedRange, true, true);
 
             foreach (DataRow row in dt.Rows)
             {
-                if (row["Username"].ToString() == username && row["Password"].ToString() == password)
+                if (row[8].ToString().Trim() == username && row[9].ToString().Trim() == password)
                 {
-                    return true;
+                    return true; // Found a duplicate
                 }
             }
-
+            return false;
+        }
+        private bool IsEmailExist(string email)
+        {
+            Workbook book = new Workbook();
+            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            Worksheet sheet = book.Worksheets[0];
+            DataTable dt = sheet.ExportDataTable(sheet.AllocatedRange, true, true);
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[6].ToString().Trim() == email)
+                {
+                    return true; // Found a duplicate
+                }
+            }
             return false;
         }
 

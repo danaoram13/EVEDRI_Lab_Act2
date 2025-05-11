@@ -70,7 +70,9 @@ namespace EVEDRI_Lab_Act2
 
             if (!log)
             {
+                
                 MessageBox.Show("\t\tInvalid login \nPlease Enter the correct Username and Password", "Log in Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 
             }
 
             for (int i = 2; i < row; i++)
