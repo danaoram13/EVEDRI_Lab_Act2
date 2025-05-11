@@ -18,7 +18,8 @@ namespace EVEDRI_Lab_Act2
        
         logs Logs = new logs();
 
-        Dashboard dashboard = new Dashboard();
+       
+
         public login()
         {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace EVEDRI_Lab_Act2
 
 
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
             int row = sheet.Rows.Length;
@@ -54,37 +55,60 @@ namespace EVEDRI_Lab_Act2
                 {
                     Logs.insertLogs(txtUsername.Text, "Successfully Added!");
 
-                    dashboard.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                    string username = sheet.Range[i, 9].Value;
+                    string profileImagePath = sheet.Range[i, 13].Value;
 
-                   /* dashboard.pictureBox1.Image = Image.FromFile(@"" + sheet.Range[i, 13].Value);*/
-                   
+                    Dashboard dashboard = new Dashboard(username, profileImagePath);
+                    MessageBox.Show("Log In Success", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Hide();
+                    dashboard.ShowDialog();
+                    
+
                     log = true;
                     break;
                 }
             }
 
+            if (!log)
+            {
+                MessageBox.Show("\t\tInvalid login \nPlease Enter the correct Username and Password", "Log in Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            if (log)
+            for (int i = 2; i < row; i++)
+            {
+                if (sheet.Range[i, 12].Value == "1")
+                {
+                    isActive++;
+                }
+                else
+                {
+                    inActive++;
+                }
+            }
+
+
+            /*if (log)
             {
                 MessageBox.Show("Log In Success", "Welcome" ,MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-                Dashboard dashboard = new Dashboard();
+                Dashboard dashboard = new Dashboard(username, profileImagePath);
                 this.Hide();
                 dashboard.ShowDialog();
 
-                /*Form1 form = new Form1();
+                *//*Form1 form = new Form1();
                 *this.Hide();
                 form.ShowDialog();*/
 
-                /*Form2 form = new Form2();
-                this.Hide();
-                form.ShowDialog();*/
-            }
-            else
-            {
-                MessageBox.Show("\t\tInvalid login \nPlease Enter the correct Username and Password", "Log in Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-       
-            }
+            /*Form2 form = new Form2();
+            this.Hide();
+            form.ShowDialog();*//*
+        }
+        else
+        {
+            MessageBox.Show("\t\tInvalid login \nPlease Enter the correct Username and Password", "Log in Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }*/
 
 
             for (int i = 2; i < row; i++)

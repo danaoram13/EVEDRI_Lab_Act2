@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,13 +18,40 @@ namespace EVEDRI_Lab_Act2
 
         Form2 form2 = new Form2();
 
-        public Form1()
+        Dashboard dashboard;
+        public Form1(Dashboard dash)
         {
             InitializeComponent();
+            dashboard = dash;
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+
+            if (txtName.Text == "" || txtAge.Text == "" || cmbCourse.Text == "" || rdoFemale.Checked == false && rdoMale.Checked == false || cmbFavColor.Text == "" ||
+                chkBasketball.Checked == false && chkVolleyball.Checked == false && chkSoccer.Checked == false || cmbCourse.Text == ""
+                || txtSaying.Text == "" || dateTimePicker1.Text == "" || txtUsername.Text == "" || txtPassword.Text == "" || txtAddress.Text == "" || txtEmail.Text == "" || txtProfile.Text == "")
+            {
+                MessageBox.Show("Error, Missing Fields You need to fill up all the empty fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtName.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Error, you can't put numbers in your name, No Numbers allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtSaying.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Error, you can't put numbers in your saying, No Numbers allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtAge.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("Error, you can't put letters in your age, No Letters allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string name = txtName.Text;
 
             //data += txtName.Text + ", ";
@@ -87,7 +115,7 @@ namespace EVEDRI_Lab_Act2
 
             Workbook book = new Workbook();
 
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
 
@@ -111,11 +139,13 @@ namespace EVEDRI_Lab_Act2
             //UNSURE OF THIS
             sheet.Range[row, 14].Value = "1";
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+            book.SaveToFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
 
             DataTable dt = sheet.ExportDataTable();
 
             form2.dataGridView1.DataSource = dt;
+
+            RefreshDashboardData();
 
             MessageBox.Show("Successfully added!", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -140,142 +170,160 @@ namespace EVEDRI_Lab_Act2
 
             //focus to name field
             txtName.Focus();
-            // if fields empty
-            //Message box show: Error, Missing Fields You need to fill up all the empty fields
-
-            if (txtName.Text == "" || txtAge.Text == "" || cmbCourse.Text == "" || rdoFemale.Checked == false && rdoMale.Checked == false || cmbFavColor.Text == "" ||
-                chkBasketball.Checked == false && chkVolleyball.Checked == false && chkSoccer.Checked == false || cmbCourse.Text == ""
-                || txtSaying.Text == "" || dateTimePicker1.Text == "" || txtUsername.Text == "" || txtPassword.Text == "" || txtAddress.Text == "" || txtEmail.Text == "" || txtProfile.Text == "")
-            {
-                MessageBox.Show("Error, Missing Fields You need to fill up all the empty fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (txtName.Text.Any(char.IsDigit)) 
-            {
-                MessageBox.Show("Error, you can't put numbers in your name, No Numbers allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if(txtSaying.Text.Any(char.IsDigit))
-            {
-                MessageBox.Show("Error, you can't put numbers in your saying, No Numbers allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if(txtAge.Text.Any(char.IsLetter))
-            {
-                MessageBox.Show("Error, you can't put letters in your age, No Letters allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            
+            
         }
-
-        private void btnDisplay_Click(object sender, EventArgs e)
+        private void RefreshDashboardData()
         {
-            //string val = "";
+            Workbook book = new Workbook();
+            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
-            //for (int j = 0; j < i; j++)
-            //{
-            //    val += "["+j+"] = "+ student[j] +"\n";
-            //}
+            Worksheet sheet = book.Worksheets[0];
+            int rowCount = sheet.Rows.Length;
 
-            //MessageBox.Show(val);
-            
-            form2.Show();
-            
+            int activeCount = 0;
+            int inactiveCount = 0;
+            int maleCount = 0;
+            int femaleCount = 0;
+            int basketballCount = 0;
+            int volleyballCount = 0;
+            int soccerCount = 0;
+
+            for (int i = 2; i <= rowCount; i++)
+            {
+                if (sheet.Range[i, 14].Value == "1")
+                {
+                    activeCount++;
+                }
+                else
+                {
+                    inactiveCount++;
+                }
+
+                if (sheet.Range[i, 2].Value == "Male")
+                {
+                    maleCount++;
+                }
+                else if (sheet.Range[i, 2].Value == "Female")
+                {
+                    femaleCount++;
+                }
+
+                string hobbies = sheet.Range[i, 3].Value;
+                if (hobbies.Contains("Basketball"))
+                {
+                    basketballCount++;
+                }
+                if (hobbies.Contains("Volleyball"))
+                {
+                    volleyballCount++;
+                }
+                if (hobbies.Contains("Soccer"))
+                {
+                    soccerCount++;
+                }
+            }
+
+          
+           /* Dashboard dashboard = new Dashboard();
+            dashboard.lblActiveCount.Text = activeCount.ToString();
+            dashboard.lblInactiveCount.Text = inactiveCount.ToString();
+            dashboard.lblMaleCount.Text = maleCount.ToString();
+            dashboard.lblFemaleCount.Text = femaleCount.ToString();
+            dashboard.lblBasketCount.Text = basketballCount.ToString();
+            dashboard.lblVolleyCount.Text = volleyballCount.ToString();
+            dashboard.lblSoccerCount.Text = soccerCount.ToString();*/
+        }
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {            
+           form2.Show();
+                     
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;
-
-
-            string gender = "";
-
-            if (rdoMale.Checked)
+            // Check for required fields
+            if (string.IsNullOrWhiteSpace(txtName.Text) ||
+                string.IsNullOrWhiteSpace(txtAge.Text) ||
+                string.IsNullOrWhiteSpace(cmbCourse.Text) ||
+                (!rdoFemale.Checked && !rdoMale.Checked) ||
+                string.IsNullOrWhiteSpace(cmbFavColor.Text) ||
+                (!chkBasketball.Checked && !chkVolleyball.Checked && !chkSoccer.Checked) ||
+                string.IsNullOrWhiteSpace(txtSaying.Text) ||
+                string.IsNullOrWhiteSpace(txtUsername.Text) ||
+                string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                string.IsNullOrWhiteSpace(txtAddress.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtProfile.Text))
             {
-
-
-                gender = rdoMale.Text;
-            }
-
-            if (rdoFemale.Checked)
-            {
-                gender = rdoFemale.Text;
-            }
-
-            string hobby = "";
-
-            if (chkBasketball.Checked)
-            {
-                hobby += chkBasketball.Text + ", ";
-            }
-
-            if (chkVolleyball.Checked)
-            {
-                hobby += chkVolleyball.Text + ", ";
-            }
-
-            if (chkSoccer.Checked)
-            {
-                hobby += chkSoccer.Text + ", ";
-            }
-
-            if (IsUsernameAndPasswordExist(txtUsername.Text, txtPassword.Text))
-            {
-                MessageBox.Show("Username/Password already exist. Please choose a different one.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please fill in all fields.", "Missing Fields", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string favColor = cmbFavColor.Text;
 
-            string saying = txtSaying.Text;
+            // Name should not contain digits
+            if (txtName.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Name cannot contain numbers.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            string address = txtAddress.Text;
+            // Saying should not contain digits
+            if (txtSaying.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Saying cannot contain numbers.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            string email = txtEmail.Text;
+            // Age should be numeric
+            if (!int.TryParse(txtAge.Text, out _))
+            {
+                MessageBox.Show("Age must be a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            string age = txtAge.Text;
+            // Check username/password duplication
+            if (IsUsernameAndPasswordExist(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
+            {
+                MessageBox.Show("Username/Password already exist. Choose a different one.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            string username = txtUsername.Text;
+            // Collect values
+            string name = txtName.Text.Trim();
+            string gender = rdoMale.Checked ? rdoMale.Text : rdoFemale.Text;
+            string favColor = cmbFavColor.Text.Trim();
+            string saying = txtSaying.Text.Trim();
+            string address = txtAddress.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string age = txtAge.Text.Trim();
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
+            string course = cmbCourse.Text.Trim();
+            string profile = txtProfile.Text.Trim();
+            string bday = dateTimePicker1.Value.ToShortDateString();
 
-            string password = txtPassword.Text;
+            // Build hobbies
+            List<string> hobbies = new List<string>();
+            if (chkBasketball.Checked) hobbies.Add(chkBasketball.Text);
+            if (chkVolleyball.Checked) hobbies.Add(chkVolleyball.Text);
+            if (chkSoccer.Checked) hobbies.Add(chkSoccer.Text);
+            string hobby = string.Join(", ", hobbies);
 
-            string course = cmbCourse.Text;
+            // Get the row to update
+            if (!int.TryParse(lblId.Text, out int rowIndex))
+            {
+                MessageBox.Show("Invalid ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            //UNSURE OF THIS
-            string bday = dateTimePicker1.Text;
+            int row = rowIndex + 2;
 
-            string profile = txtProfile.Text;
-
-            //data += cmbFavColor.Text + ", ";
-
-            //data += txtSaying.Text;
-
-            //student[i] = data;
-
-            //i++;
-
-            /*form2.updateData(Convert.ToInt32(lblId.Text), name, gender, hobby, favColor, saying);*/
-
-            int row = Convert.ToInt32(lblId.Text) + 2;
-
+            // Load workbook
             Workbook book = new Workbook();
-
-            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
-
+            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = book.Worksheets[0];
 
-            // int row = sheet.Rows.Length;
-
-            //sheet.Range[row, 1].Value = name;
-            //sheet.Range[row, 2].Value = gender;
-            //sheet.Range[row, 3].Value = hobby;        
-            //sheet.Range[row, 8].Value = favColor;
-            //sheet.Range[row, 9].Value = saying;
-            //sheet.Range[row, 4].Value = txtAddress.Text;
-            //sheet.Range[row, 5].Value = txtEmail.Text;
-            //sheet.Range[row, 6].Value = dtpBirthday.Text;
-            //sheet.Range[row, 7].Value = txtAge.Text;
-            //sheet.Range[row, 10].Value = txtUsername.Text;
-            //sheet.Range[row, 11].Value = txtPassword.Text;
-
+            // Update Excel sheet
             sheet.Range[row, 1].Value = name;
             sheet.Range[row, 2].Value = gender;
             sheet.Range[row, 3].Value = hobby;
@@ -289,18 +337,19 @@ namespace EVEDRI_Lab_Act2
             sheet.Range[row, 11].Value = saying;
             sheet.Range[row, 12].Value = course;
             sheet.Range[row, 13].Value = profile;
-            
-            sheet.Range[row, 14].Value = "1";
+            sheet.Range[row, 14].Value = "1"; // Assuming this marks the row as active
 
-            book.SaveToFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+            // Save changes
+            book.SaveToFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
 
+            // Update DataGridView
             DataTable dt = sheet.ExportDataTable();
-
             form2.dataGridView1.DataSource = dt;
 
-            MessageBox.Show("Successfully updated!", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Success message
+            MessageBox.Show("Successfully updated!", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //reset fields
+            // Reset all fields
             txtName.Clear();
             rdoMale.Checked = false;
             rdoFemale.Checked = false;
@@ -311,19 +360,14 @@ namespace EVEDRI_Lab_Act2
             txtSaying.Clear();
             txtAge.Clear();
             cmbCourse.SelectedIndex = -1;
-
-            //UNSURE OF THIS
-            dateTimePicker1.Text = string.Empty;
-
+            dateTimePicker1.Value = DateTime.Now;
             txtUsername.Clear();
             txtPassword.Clear();
             txtAddress.Clear();
             txtEmail.Clear();
             txtProfile.Clear();
 
-            //focus to name field
-            txtName.Focus();          
-
+            txtName.Focus();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -365,8 +409,8 @@ namespace EVEDRI_Lab_Act2
 
         private void btnBacktoDashboard_Click(object sender, EventArgs e)
         {
-            Dashboard dashboard = new Dashboard();
-            this.Hide();
+           
+            this.Close();
             dashboard.ShowDialog();
         }
     }

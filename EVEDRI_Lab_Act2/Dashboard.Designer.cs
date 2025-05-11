@@ -38,7 +38,7 @@
             this.lblDash = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblName = new System.Windows.Forms.Label();
+            this.lblUserName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblActiveStudents = new System.Windows.Forms.Label();
             this.lblActiveCount = new System.Windows.Forms.Label();
@@ -98,7 +98,7 @@
             this.panel1.Controls.Add(this.lblDash);
             this.panel1.Controls.Add(this.lblDate);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.lblName);
+            this.panel1.Controls.Add(this.lblUserName);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 600);
@@ -174,7 +174,7 @@
             this.lblDash.AutoSize = true;
             this.lblDash.BackColor = System.Drawing.Color.Transparent;
             this.lblDash.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDash.Location = new System.Drawing.Point(64, 261);
+            this.lblDash.Location = new System.Drawing.Point(64, 252);
             this.lblDash.Name = "lblDash";
             this.lblDash.Size = new System.Drawing.Size(90, 18);
             this.lblDash.TabIndex = 1;
@@ -184,10 +184,10 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(87, 218);
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(72, 208);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(39, 18);
+            this.lblDate.Size = new System.Drawing.Size(36, 16);
             this.lblDate.TabIndex = 1;
             this.lblDate.Text = "Date";
             // 
@@ -200,16 +200,16 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // lblName
+            // lblUserName
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.BackColor = System.Drawing.Color.Transparent;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(79, 171);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(55, 100);
-            this.lblName.TabIndex = 1;
-            this.lblName.Text = "Name\r\n\r\n\r\n\r\n\r\n";
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.BackColor = System.Drawing.Color.Transparent;
+            this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.Location = new System.Drawing.Point(84, 171);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(55, 20);
+            this.lblUserName.TabIndex = 1;
+            this.lblUserName.Text = "Name";
             // 
             // panel2
             // 
@@ -631,7 +631,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnLogs;
         private System.Windows.Forms.Button btnInactive;
@@ -648,32 +648,32 @@
         private System.Windows.Forms.Label lblGender;
         private System.Windows.Forms.Label lblColor;
         private System.Windows.Forms.Label lblHobbies;
-        private System.Windows.Forms.Label lblActiveCount;
-        private System.Windows.Forms.Label lblRedCount;
-        private System.Windows.Forms.Label lblBlueCount;
-        private System.Windows.Forms.Label lblBlackCount;
         private System.Windows.Forms.Label lblRed;
         private System.Windows.Forms.Label lblBlue;
         private System.Windows.Forms.Label lblBlack;
-        private System.Windows.Forms.Label lblInactiveCount;
-        private System.Windows.Forms.Label lblSoccerCount;
-        private System.Windows.Forms.Label lblVolleyCount;
         private System.Windows.Forms.Label lblSoccer;
         private System.Windows.Forms.Label lblBasketball;
-        private System.Windows.Forms.Label lblFemaleCount;
-        private System.Windows.Forms.Label lblMaleCount;
         private System.Windows.Forms.Label lblFemale;
         private System.Windows.Forms.Label lblMale;
         private System.Windows.Forms.Label lblCourse;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label lblBsitCount;
         private System.Windows.Forms.Label lblBsit;
-        private System.Windows.Forms.Label lblBasketCount;
-        private System.Windows.Forms.Label lblBscpeCount;
-        private System.Windows.Forms.Label lblBscsCount;
         private System.Windows.Forms.Label lblBsCpe;
         private System.Windows.Forms.Label lblBscs;
         public System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnAddStudent;
+        public System.Windows.Forms.Label lblActiveCount;
+        public System.Windows.Forms.Label lblRedCount;
+        public System.Windows.Forms.Label lblBlueCount;
+        public System.Windows.Forms.Label lblBlackCount;
+        public System.Windows.Forms.Label lblInactiveCount;
+        public System.Windows.Forms.Label lblSoccerCount;
+        public System.Windows.Forms.Label lblVolleyCount;
+        public System.Windows.Forms.Label lblFemaleCount;
+        public System.Windows.Forms.Label lblMaleCount;
+        public System.Windows.Forms.Label lblBsitCount;
+        public System.Windows.Forms.Label lblBasketCount;
+        public System.Windows.Forms.Label lblBscpeCount;
+        public System.Windows.Forms.Label lblBscsCount;
     }
 }
