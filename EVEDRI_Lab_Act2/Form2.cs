@@ -172,7 +172,7 @@ namespace EVEDRI_Lab_Act2
                 form1.chkBasketball.Checked = hobbies.Contains("Basketball");
                 form1.chkVolleyball.Checked = hobbies.Contains("Volleyball");
                 form1.chkSoccer.Checked = hobbies.Contains("Soccer");
-
+                 
                 form1.cmbFavColor.Text = row.Cells[3].Value?.ToString();
                 form1.txtAddress.Text = row.Cells[4].Value?.ToString();
                 form1.txtEmail.Text = row.Cells[5].Value?.ToString();
