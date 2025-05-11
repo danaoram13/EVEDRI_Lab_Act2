@@ -14,10 +14,12 @@ namespace EVEDRI_Lab_Act2
 {
     public partial class Dashboard : Form
     {
-
+        logs Logs = new logs();
+        private string getUsername;
         public Dashboard(string username, string profileImagePath)
         {
             InitializeComponent();
+            getUsername = username; // Store the username in a field
             /*       lblActiveCount.Text = showcount(13, "1").ToString();
                    lblInactiveCount.Text = showcount(13, "0").ToString();
                    lblMaleCount.Text = showcount(2, "Male").ToString();
@@ -124,42 +126,52 @@ namespace EVEDRI_Lab_Act2
             Exit = MessageBox.Show("Are you sure you want to exit?", "EXIT", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Exit == DialogResult.Yes)
             {
-                login login = new login();
+                
                 this.Close();
-                login.Show();
+                /*  login login = new login();
+                  login.Show();*/
                 /*Application.Exit();*/
             }
-            /*login login = new login();
-            login.Show();*/
+            login login = new login();
+            login.Show();
+
+            logs Logs = new logs();
+            // Use the 'getUsername' field from the Dashboard class instead of 'Logs.getUsername'
+            Logs.insertLogs(getUsername, "Successfully Logged Out!");
         }
 
         private void btnActive_Click(object sender, EventArgs e)
         {
-            var f2 = new Form2();
+            
+            var f2 = new Form2(this);
+
+            f2.btnDeleteAll.Visible = false;
+
             Workbook book = new Workbook();
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sh = book.Worksheets[0];
 
-            DataTable dt = sh.ExportDataTable();
+            /*DataTable dt = sh.ExportDataTable();*/
+            DataTable dt = sh.ExportDataTable(sh.AllocatedRange, true, true);
+
             DataTable filtered = dt.Clone();
 
             foreach (DataRow row in dt.Rows)
             {
-                if (row[14].ToString() == "1") 
+                if (dt.Columns.Count > 14 && row[14].ToString().Trim() == "1")
                 {
                     filtered.ImportRow(row);
                 }
             }
 
-
-
             f2.dataGridView1.DataSource = filtered;
             f2.Show();
+            this.Hide();
         }
 
         private void btnInactive_Click(object sender, EventArgs e)
         {
-            var f2 = new Form2();
+            var f2 = new Form2(this);
             Workbook book = new Workbook();
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sh = book.Worksheets[0];
@@ -169,7 +181,7 @@ namespace EVEDRI_Lab_Act2
 
             foreach (DataRow row in dt.Rows)
             {
-                if (row[14].ToString() == "0") 
+                if (dt.Columns.Count > 14 && row[14].ToString().Trim() == "0")
                 {
                     filtered.ImportRow(row);
                 }
@@ -183,16 +195,26 @@ namespace EVEDRI_Lab_Act2
 
         private void btnLogs_Click(object sender, EventArgs e)
         {
-            var f2 = new Form2();
+           /* var f2 = new Form2();
             ShowLogs(f2.dataGridView1);
+            f2.Show();
+*/
+            var f2 = new Form2(this);
+            ShowLogs(f2.dataGridView1);
+            this.Hide();
             f2.Show();
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1(this);
+           /* Form1 form = new Form1();
             this.Close();
+            form.ShowDialog();*/
+
+            Form1 form = new Form1(this);  // pass the current dashboard instance
+            this.Hide();                   // instead of Close()
             form.ShowDialog();
+            this.Show();
         }
     }
 }

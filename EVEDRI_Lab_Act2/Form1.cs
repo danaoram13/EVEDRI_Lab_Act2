@@ -16,13 +16,15 @@ namespace EVEDRI_Lab_Act2
     public partial class Form1 : Form
     {
 
-        Form2 form2 = new Form2();
+        /*Form2 form2 = new Form2();*/
+        Form2 form2;
 
         Dashboard dashboard;
         public Form1(Dashboard dash)
         {
             InitializeComponent();
             dashboard = dash;
+            form2 = new Form2(dashboard);
 
         }
 
@@ -236,8 +238,7 @@ namespace EVEDRI_Lab_Act2
         }
         private void btnDisplay_Click(object sender, EventArgs e)
         {            
-           form2.Show();
-                     
+           form2.Show();                     
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -409,9 +410,12 @@ namespace EVEDRI_Lab_Act2
 
         private void btnBacktoDashboard_Click(object sender, EventArgs e)
         {
-           
+            /*Dashboard dashboard = new Dashboard();
             this.Close();
             dashboard.ShowDialog();
+*/
+            this.Close();           // Close Form1
+            dashboard.Show();
         }
     }
 }

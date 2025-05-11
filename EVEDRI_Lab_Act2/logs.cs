@@ -16,7 +16,8 @@ namespace EVEDRI_Lab_Act2
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sh = book.Worksheets[1];
-            int r = sh.Rows.Length;
+          /*  int r = sh.Rows.Length;*/
+            int r = sh.LastRow + 1;
             sh.Range[r, 1].Value = user;
             sh.Range[r, 2].Value = message;
             sh.Range[r, 3].Value = DateTime.Now.ToString("MM/dd/yyyy");

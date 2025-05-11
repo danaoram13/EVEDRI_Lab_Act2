@@ -147,10 +147,10 @@
         #endregion
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnDeleteAll;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnBack;
+        public System.Windows.Forms.Button btnDeleteAll;
     }
 }

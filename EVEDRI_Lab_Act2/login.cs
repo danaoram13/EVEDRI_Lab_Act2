@@ -18,8 +18,6 @@ namespace EVEDRI_Lab_Act2
        
         logs Logs = new logs();
 
-       
-
         public login()
         {
             InitializeComponent();
@@ -53,7 +51,7 @@ namespace EVEDRI_Lab_Act2
                 if (sheet.Range[i, 9].Value == txtUsername.Text &&
                     sheet.Range[i, 10].Value == txtPassword.Text)
                 {
-                    Logs.insertLogs(txtUsername.Text, "Successfully Added!");
+                    Logs.insertLogs(txtUsername.Text, "Successfully Logged In!");
 
                     string username = sheet.Range[i, 9].Value;
                     string profileImagePath = sheet.Range[i, 13].Value;
@@ -149,6 +147,7 @@ namespace EVEDRI_Lab_Act2
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            Application.Exit();
             this.Close();
         }
 

@@ -17,64 +17,68 @@ namespace EVEDRI_Lab_Act2
 {
     public partial class Form2 : Form
     {
+        Dashboard dashboard;
 
-      
-        public Form2()
+        public Form2(Dashboard dash)
         {
             InitializeComponent();
             LoadExcelFile();
+            dashboard = dash;
             
+
         }
         public void LoadExcelFile() 
         {
             Workbook book = new Workbook();
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
+
             Worksheet sheet = book.Worksheets[0];
             DataTable dt = sheet.ExportDataTable();
             dataGridView1.DataSource = dt;
+            
         }
 
 
-       /* C:\Users\ACT-STUDENT\Downloads*/
+        /* C:\Users\ACT-STUDENT\Downloads*/
 
         //method for showing data on datagrid view
-        public void insertData(string name, string gender, string hobby, string favColor, string saying, 
-            string address, string email, string age, string username, string password)
-        {
-            int i = dataGridView1.Rows.Add();
+        /*  public void insertData(string name, string gender, string hobby, string favColor, string saying, 
+              string address, string email, string age, string username, string password)
+          {
+              int i = dataGridView1.Rows.Add();
 
-            this.dataGridView1.Rows[i].Cells[0].Value = name;
-            this.dataGridView1.Rows[i].Cells[1].Value = gender;
-            this.dataGridView1.Rows[i].Cells[2].Value = hobby;
-            this.dataGridView1.Rows[i].Cells[3].Value = favColor;
-            this.dataGridView1.Rows[i].Cells[4].Value = saying;
-            this.dataGridView1.Rows[i].Cells[5].Value = address;
-            this.dataGridView1.Rows[i].Cells[6].Value = email;
-            this.dataGridView1.Rows[i].Cells[7].Value = age;
-            this.dataGridView1.Rows[i].Cells[8].Value = username;
-            this.dataGridView1.Rows[i].Cells[9].Value = password;
+              this.dataGridView1.Rows[i].Cells[0].Value = name;
+              this.dataGridView1.Rows[i].Cells[1].Value = gender;
+              this.dataGridView1.Rows[i].Cells[2].Value = hobby;
+              this.dataGridView1.Rows[i].Cells[3].Value = favColor;
+              this.dataGridView1.Rows[i].Cells[4].Value = saying;
+              this.dataGridView1.Rows[i].Cells[5].Value = address;
+              this.dataGridView1.Rows[i].Cells[6].Value = email;
+              this.dataGridView1.Rows[i].Cells[7].Value = age;
+              this.dataGridView1.Rows[i].Cells[8].Value = username;
+              this.dataGridView1.Rows[i].Cells[9].Value = password;
 
-        }
-        public void updateData(int id, string name, string gender, string hobby, string favColor, string saying,
-            string address, string email, string age, string username, string password)
-        {
-            this.dataGridView1.Rows[id].Cells[0].Value = name;
-            this.dataGridView1.Rows[id].Cells[1].Value = gender;
-            this.dataGridView1.Rows[id].Cells[2].Value = hobby;
-            this.dataGridView1.Rows[id].Cells[3].Value = favColor;
-            this.dataGridView1.Rows[id].Cells[4].Value = saying;
-            this.dataGridView1.Rows[id].Cells[5].Value = address;
-            this.dataGridView1.Rows[id].Cells[6].Value = email;
-            this.dataGridView1.Rows[id].Cells[7].Value = age;
-            this.dataGridView1.Rows[id].Cells[8].Value = username;
-            this.dataGridView1.Rows[id].Cells[9].Value = password;
+          }
+          public void updateData(int id, string name, string gender, string hobby, string favColor, string saying,
+              string address, string email, string age, string username, string password)
+          {
+              this.dataGridView1.Rows[id].Cells[0].Value = name;
+              this.dataGridView1.Rows[id].Cells[1].Value = gender;
+              this.dataGridView1.Rows[id].Cells[2].Value = hobby;
+              this.dataGridView1.Rows[id].Cells[3].Value = favColor;
+              this.dataGridView1.Rows[id].Cells[4].Value = saying;
+              this.dataGridView1.Rows[id].Cells[5].Value = address;
+              this.dataGridView1.Rows[id].Cells[6].Value = email;
+              this.dataGridView1.Rows[id].Cells[7].Value = age;
+              this.dataGridView1.Rows[id].Cells[8].Value = username;
+              this.dataGridView1.Rows[id].Cells[9].Value = password;
 
 
-            dataGridView1.EndEdit();
-            dataGridView1.CurrentCell = null;
-        }
-
+              dataGridView1.EndEdit();
+              dataGridView1.CurrentCell = null;
+          }*/
+        
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
@@ -176,9 +180,12 @@ namespace EVEDRI_Lab_Act2
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-         /*   Dashboard dashboard = new Dashboard();
-            this.Close();
-            dashboard.ShowDialog();*/
+            /* Dashboard dashboard = new Dashboard();
+             this.Close();
+             dashboard.ShowDialog();*/
+
+            this.Hide();           // Close Form1
+            dashboard.Show();
         }
 
       
