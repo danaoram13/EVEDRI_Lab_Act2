@@ -61,7 +61,7 @@ namespace EVEDRI_Lab_Act2
             lblBscpeCount.Text = showcount(12, "BSCpE").ToString();
         }
 
-        public int showcount(int m, string val)
+        /*public int showcount(int m, string val)
         {
             Workbook workbook = new Workbook();
             workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
@@ -78,7 +78,37 @@ namespace EVEDRI_Lab_Act2
             }
 
             return count;
+        }*/
+        public int showcount(int m, string val)
+        {
+            Workbook workbook = new Workbook();
+            workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            Worksheet sheet = workbook.Worksheets[0];
+            int r = sheet.Rows.Length;
+            int count = 0;
+
+            for (int i = 2; i < r; i++)
+            {
+                string cellValue = sheet.Range[i, m].Value;
+
+                // For hobby column (column 3), use Contains check
+                if (m == 3)
+                {
+                    if (cellValue.Contains(val))
+                        count++;
+                }
+                else
+                {
+                    if (cellValue == val)
+                        count++;
+                }
+            }
+
+            return count;
         }
+
+
+
         public void ShowLogs(DataGridView D)
         {
             Workbook workbook = new Workbook();
