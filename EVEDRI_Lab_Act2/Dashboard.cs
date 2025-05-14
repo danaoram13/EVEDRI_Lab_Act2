@@ -20,20 +20,7 @@ namespace EVEDRI_Lab_Act2
         public Dashboard(string username, string profileImagePath)
         {
             InitializeComponent();
-            getUsername = username; // Store the username in a field
-            /*       lblActiveCount.Text = showcount(13, "1").ToString();
-                   lblInactiveCount.Text = showcount(13, "0").ToString();
-                   lblMaleCount.Text = showcount(2, "Male").ToString();
-                   lblFemaleCount.Text = showcount(2, "Female").ToString();
-                   lblBasketCount.Text = showcount(3, "Basketball").ToString();
-                   lblVolleyCount.Text = showcount(3, "Volleyball").ToString();
-                   lblSoccerCount.Text = showcount(3, "Soccer").ToString();
-                   lblRedCount.Text = showcount(4, "Red").ToString();
-                   lblBlueCount.Text = showcount(4, "Blue").ToString();
-                   lblBlackCount.Text = showcount(4, "Black").ToString();
-                   lblBsitCount.Text = showcount(12, "BSIT").ToString();
-                   lblBscsCount.Text = showcount(12, "BSCS").ToString();
-                   lblBscpeCount.Text = showcount(12, "BSCpE").ToString();*/
+            getUsername = username; 
             
             RefreshDashboardCounts(); // call here once
 
@@ -84,6 +71,28 @@ namespace EVEDRI_Lab_Act2
         }*/
         public int showcount(int m, string val)
         {
+            //Workbook workbook = new Workbook();
+            //workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            //Worksheet sheet = workbook.Worksheets[0];
+            //int r = sheet.Rows.Length;
+            //int count = 0;
+
+            //for (int i = 2; i < r; i++)
+            //{
+            //    string cellValue = sheet.Range[i, m].Value;
+
+            //    // For hobby column (column 3), use Contains check
+            //    if (m == 3)
+            //    {
+            //        if (cellValue.Contains(val))
+            //            count++;
+            //    }
+            //    else
+            //    {
+            //        if (cellValue == val)
+            //            count++;
+            //    }
+            //}
             Workbook workbook = new Workbook();
             workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = workbook.Worksheets[0];
@@ -93,8 +102,6 @@ namespace EVEDRI_Lab_Act2
             for (int i = 2; i < r; i++)
             {
                 string cellValue = sheet.Range[i, m].Value;
-
-                // For hobby column (column 3), use Contains check
                 if (m == 3)
                 {
                     if (cellValue.Contains(val))
@@ -106,7 +113,6 @@ namespace EVEDRI_Lab_Act2
                         count++;
                 }
             }
-
             return count;
         }
 

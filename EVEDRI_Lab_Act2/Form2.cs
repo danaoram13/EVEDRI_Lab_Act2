@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-    
+
 namespace EVEDRI_Lab_Act2
 {
     public partial class Form2 : Form
@@ -27,7 +27,7 @@ namespace EVEDRI_Lab_Act2
             getUsername = username;
 
         }
-        public void LoadExcelFile() 
+        public void LoadExcelFile()
         {
             Workbook book = new Workbook();
             book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
@@ -36,7 +36,7 @@ namespace EVEDRI_Lab_Act2
             Worksheet sheet = book.Worksheets[0];
             DataTable dt = sheet.ExportDataTable();
             dataGridView1.DataSource = dt;
-            
+
         }
 
 
@@ -78,7 +78,7 @@ namespace EVEDRI_Lab_Act2
               dataGridView1.EndEdit();
               dataGridView1.CurrentCell = null;
           }*/
-        
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             /*int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
@@ -90,13 +90,13 @@ namespace EVEDRI_Lab_Act2
             //sheet.Range[i ,1].Value = "";*/
 
 
-          
 
 
-           
+
+
 
         }
-        
+
 
         private void btnDeleteAll_Click(object sender, EventArgs e)
         {
@@ -180,7 +180,7 @@ namespace EVEDRI_Lab_Act2
                 form1.chkBasketball.Checked = hobbies.Contains("Basketball");
                 form1.chkVolleyball.Checked = hobbies.Contains("Volleyball");
                 form1.chkSoccer.Checked = hobbies.Contains("Soccer");
-                 
+
                 form1.cmbFavColor.Text = row.Cells[3].Value?.ToString();
                 form1.txtAddress.Text = row.Cells[4].Value?.ToString();
                 form1.txtEmail.Text = row.Cells[5].Value?.ToString();
@@ -234,8 +234,8 @@ namespace EVEDRI_Lab_Act2
         {
             Form1 form = new Form1(dashboard, "defaultUserName");
 
-           form.Show();
-            
+            form.Show();
+
         }
 
         private void btnSearchLogs_Click(object sender, EventArgs e)
@@ -275,88 +275,187 @@ namespace EVEDRI_Lab_Act2
             }
         }
 
+        /*  private void btnDeleteActive_Click(object sender, EventArgs e)
+          {
+
+              if (dataGridView1.SelectedRows.Count == 0)
+              {
+                  MessageBox.Show("Please select a row to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                  return;
+              }
+
+              DialogResult confirmation = MessageBox.Show("Are you sure you want to delete the selected Index?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+              if (confirmation != DialogResult.OK) return;
+
+              // Load the Excel file
+              Workbook book = new Workbook();
+              book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+              Worksheet sheet = book.Worksheets[0];
+
+
+              // Collect names of users marked as inactive for logging
+              List<string> deletedUsers = new List<string>();
+
+              foreach (DataGridViewRow dgvRow in dataGridView1.SelectedRows)
+              {
+                  string nameToDelete = dgvRow.Cells[0].Value.ToString();
+
+                  for (int i = 2; i <= sheet.LastRow; i++) // assuming data starts from row 2
+                  {
+                      string nameInSheet = sheet.Range[i, 1].Value;
+
+                      if (nameInSheet == nameToDelete)
+                      {
+                          sheet.Range[i, 14].Value = "0"; // Mark as inactive
+                          deletedUsers.Add(nameToDelete);
+                          break;
+                      }
+                  }
+
+                  dataGridView1.Rows.Remove(dgvRow);
+              }
+
+              // Save changes
+              book.SaveToFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+
+              // Log all deleted users after processing
+              foreach (var name in deletedUsers)
+              {
+                  logs logInstance = new logs(); // Create an instance of the logs class
+                  logInstance.insertLogs(getUsername, $"Set '{name}' as Inactive.");
+              }
+
+              dashboard.RefreshDashboardCounts();
+              MessageBox.Show("Successfully set as Inactive.");
+          }*/
+
         private void btnDeleteActive_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+                MessageBox.Show("Please select a row to set as Inactive.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                // Update status in DataGridView
-                dataGridView1.Rows[selectedIndex].Cells[14].Value = "0";
+            DialogResult confirm = MessageBox.Show("Are you sure you want to mark this record as Inactive?",
+                                                   "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
 
-                // Load the Excel file
-                Workbook book = new Workbook();
-                book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
-                Worksheet sheet = book.Worksheets[0];
+            // Load Excel file
+            string path = @"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx";
+            Workbook book = new Workbook();
+            book.LoadFromFile(path);
+            Worksheet sheet = book.Worksheets[0];
 
+            // Track changes
+            List<string> inactiveUsers = new List<string>();
 
-                string username = dataGridView1.Rows[selectedIndex].Cells[10].Value.ToString();
+            foreach (DataGridViewRow dgvRow in dataGridView1.SelectedRows)
+            {
+                if (dgvRow.IsNewRow) continue;
 
-                for (int i = 2; i <= sheet.LastRow; i++)
+                string studentName = dgvRow.Cells[0].Value?.ToString();
+
+                for (int rowIndex = 2; rowIndex <= sheet.LastRow; rowIndex++) // Start at row 2 to skip header
                 {
-                    if (sheet.Range[i, 9].Value == username)
+                    string nameInExcel = sheet.Range[rowIndex, 1].Value; // Column A (1-based)
+
+                    if (nameInExcel == studentName)
                     {
-                        sheet.Range[i, 14].Value = "0";
+                        // Set Status column (N / column 14) to "0"
+                        sheet.Range[rowIndex, 14].Value = "0";
+                        inactiveUsers.Add(studentName);
                         break;
                     }
                 }
 
-
-                // Save changes
-                book.SaveToFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
-
-                MessageBox.Show("Deleted. Status marked as '0'", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                logs logs = new logs();
-                logs.insertLogs(getUsername, "Deleted an active student");
+                dataGridView1.Rows.Remove(dgvRow); // Remove from DataGridView
             }
-            else
+
+            // Save changes
+            book.SaveToFile(path);
+
+            // Log actions
+            foreach (string name in inactiveUsers)
             {
-                MessageBox.Show("Please select a row to delete.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logs logInstance = new logs();
+                logInstance.insertLogs(getUsername, $"Marked '{name}' as Inactive.");
             }
+
+            // Update dashboard
+            dashboard.RefreshDashboardCounts();
+
+            MessageBox.Show("Selected record(s) marked as Inactive.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnDeleteInactive_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+                MessageBox.Show("Please select a row to activate.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                // Update status in DataGridView
-                dataGridView1.Rows[selectedIndex].Cells[12].Value = "1";
+            DialogResult confirm = MessageBox.Show("Are you sure you want to mark this record as Active?",
+                                                   "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
 
-                // Load the Excel file
-                Workbook book = new Workbook();
-                book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
-                Worksheet sheet = book.Worksheets[0];
+            string filePath = @"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx";
+            Workbook book = new Workbook();
+            book.LoadFromFile(filePath);
+            Worksheet sheet = book.Worksheets[0];
 
+            List<string> activatedUsers = new List<string>();
 
-                string username = dataGridView1.Rows[selectedIndex].Cells[10].Value.ToString();
+            foreach (DataGridViewRow dgvRow in dataGridView1.SelectedRows)
+            {
+                if (dgvRow.IsNewRow) continue;
 
-                for (int i = 2; i <= sheet.LastRow; i++)
+                string studentName = dgvRow.Cells[0].Value?.ToString();
+
+                for (int i = 2; i <= sheet.LastRow; i++) // Start from row 2 to skip header
                 {
-                    if (sheet.Range[i, 9].Value == username)
+                    string nameInExcel = sheet.Range[i, 1].Value;
+
+                    if (nameInExcel == studentName)
                     {
-                        sheet.Range[i, 15].Value = "1";
+                        sheet.Range[i, 14].Value = "1"; // Set status to Active
+                        activatedUsers.Add(studentName);
                         break;
                     }
                 }
 
-
-                // Save changes
-                book.SaveToFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
-
-                MessageBox.Show("User activated. Status marked as '1'", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                logs logs = new logs();
-                logs.insertLogs(getUsername, "Deleted an inactive user");
+                dataGridView1.Rows.Remove(dgvRow);
             }
-            else
+
+            book.SaveToFile(filePath);
+
+            foreach (string name in activatedUsers)
             {
-                MessageBox.Show("Please select a row to delete.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logs logInstance = new logs();
+                logInstance.insertLogs(getUsername, $"Reactivated user '{name}'.");
             }
 
+            dashboard.RefreshDashboardCounts();
+
+            MessageBox.Show("Selected record(s) set to Active.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Optional: Reload only inactive students into DataGridView
+            DataTable dt = sheet.ExportDataTable();
+            DataTable filtered = dt.Clone();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[13].ToString() == "0") // Column 14 is index 13 (zero-based)
+                {
+                    filtered.ImportRow(row);
+                }
+            }
+
+            dataGridView1.DataSource = filtered;
         }
+       
     }
 }
 
