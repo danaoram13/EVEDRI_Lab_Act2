@@ -20,13 +20,17 @@ namespace EVEDRI_Lab_Act2
         Form2 form2;
 
         Dashboard dashboard;
-        public Form1(Dashboard dash)
+        public string getUsername;
+
+        public Form1(Dashboard dash, string userName)
         {
             InitializeComponent();
             dashboard = dash;
-            form2 = new Form2(dashboard);
+            form2 = new Form2(dashboard, getUsername);
+            getUsername = userName;
 
         }
+   
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -156,6 +160,10 @@ namespace EVEDRI_Lab_Act2
             RefreshDashboardData();
 
             MessageBox.Show("Successfully added!", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            logs logs = new logs();
+            /*getUsername = name;*/
+            logs.insertLogs(getUsername, $"Added new user: {name}");
 
             //reset fields
             txtName.Clear();

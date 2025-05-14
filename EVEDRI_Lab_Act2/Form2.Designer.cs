@@ -37,6 +37,9 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnSearchLogs = new System.Windows.Forms.Button();
+            this.btnDeleteActive = new System.Windows.Forms.Button();
+            this.btnDeleteInactive = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +63,7 @@
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnDeleteAll
@@ -72,6 +76,7 @@
             this.btnDeleteAll.TabIndex = 1;
             this.btnDeleteAll.Text = "Delete All";
             this.btnDeleteAll.UseVisualStyleBackColor = true;
+            this.btnDeleteAll.Visible = false;
             this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
             // 
             // btnClose
@@ -134,6 +139,39 @@
             this.btnAddNew.Visible = false;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // btnSearchLogs
+            // 
+            this.btnSearchLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchLogs.Location = new System.Drawing.Point(761, 73);
+            this.btnSearchLogs.Name = "btnSearchLogs";
+            this.btnSearchLogs.Size = new System.Drawing.Size(108, 31);
+            this.btnSearchLogs.TabIndex = 8;
+            this.btnSearchLogs.Text = "Search";
+            this.btnSearchLogs.UseVisualStyleBackColor = true;
+            this.btnSearchLogs.Visible = false;
+            this.btnSearchLogs.Click += new System.EventHandler(this.btnSearchLogs_Click);
+            // 
+            // btnDeleteActive
+            // 
+            this.btnDeleteActive.Location = new System.Drawing.Point(245, 548);
+            this.btnDeleteActive.Name = "btnDeleteActive";
+            this.btnDeleteActive.Size = new System.Drawing.Size(109, 31);
+            this.btnDeleteActive.TabIndex = 9;
+            this.btnDeleteActive.Text = "Delete Act";
+            this.btnDeleteActive.UseVisualStyleBackColor = true;
+            this.btnDeleteActive.Click += new System.EventHandler(this.btnDeleteActive_Click);
+            // 
+            // btnDeleteInactive
+            // 
+            this.btnDeleteInactive.Location = new System.Drawing.Point(130, 548);
+            this.btnDeleteInactive.Name = "btnDeleteInactive";
+            this.btnDeleteInactive.Size = new System.Drawing.Size(109, 31);
+            this.btnDeleteInactive.TabIndex = 10;
+            this.btnDeleteInactive.Text = "Delete Inact";
+            this.btnDeleteInactive.UseVisualStyleBackColor = true;
+            this.btnDeleteInactive.Click += new System.EventHandler(this.btnDeleteInactive_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,14 +179,17 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Controls.Add(this.btnDeleteInactive);
+            this.Controls.Add(this.btnDeleteActive);
+            this.Controls.Add(this.btnSearchLogs);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnDeleteAll);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.btnDelete);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form2";
@@ -169,5 +210,8 @@
         private System.Windows.Forms.Button btnBack;
         public System.Windows.Forms.Button btnDeleteAll;
         public System.Windows.Forms.Button btnAddNew;
+        public System.Windows.Forms.Button btnSearchLogs;
+        private System.Windows.Forms.Button btnDeleteActive;
+        private System.Windows.Forms.Button btnDeleteInactive;
     }
 }

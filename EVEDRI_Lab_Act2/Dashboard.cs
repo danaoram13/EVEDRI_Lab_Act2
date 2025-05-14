@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -161,7 +162,7 @@ namespace EVEDRI_Lab_Act2
             }
 
             // Open Form2 and show filtered data
-            Form2 f2 = new Form2(this);
+            Form2 f2 = new Form2(this, getUsername);
             f2.dataGridView1.DataSource = activeStudents;
             f2.Show();
             f2.btnAddNew.Visible = true;
@@ -191,7 +192,7 @@ namespace EVEDRI_Lab_Act2
             }
 
             // Open Form2 and show filtered data
-            Form2 f2 = new Form2(this);
+            Form2 f2 = new Form2(this, getUsername);
             f2.dataGridView1.DataSource = activeStudents;
             f2.Show();
             this.Hide();
@@ -203,19 +204,20 @@ namespace EVEDRI_Lab_Act2
             ShowLogs(f2.dataGridView1);
             f2.Show();
 */
-            var f2 = new Form2(this);
+            var f2 = new Form2(this, getUsername);
             ShowLogs(f2.dataGridView1);
+            f2.btnSearchLogs.Visible = true;
             this.Hide();
             f2.Show();
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-           /* Form1 form = new Form1();
-            this.Close();
-            form.ShowDialog();*/
+            /* Form1 form = new Form1();
+             this.Close();
+             form.ShowDialog();*/
 
-            Form1 form = new Form1(this);  // pass the current dashboard instance
+            Form1 form = new Form1(this, getUsername);  // pass the current dashboard instance
             this.Hide();                   // instead of Close()
             form.ShowDialog();
             this.Show();

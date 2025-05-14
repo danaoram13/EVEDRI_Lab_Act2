@@ -18,13 +18,13 @@ namespace EVEDRI_Lab_Act2
     public partial class Form2 : Form
     {
         Dashboard dashboard;
-
-        public Form2(Dashboard dash)
+        private string getUsername;
+        public Form2(Dashboard dash, string username)
         {
             InitializeComponent();
             LoadExcelFile();
             dashboard = dash;
-            
+            getUsername = username;
 
         }
         public void LoadExcelFile() 
@@ -81,14 +81,22 @@ namespace EVEDRI_Lab_Act2
         
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+            /*int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
             dataGridView1.Rows.RemoveAt(selectedRowIndex);
 
             Workbook book = new Workbook();
             Worksheet sheet = book.Worksheets[0];
 
-            //sheet.Range[i ,1].Value = "";
+            //sheet.Range[i ,1].Value = "";*/
+
+
+          
+
+
+           
+
         }
+        
 
         private void btnDeleteAll_Click(object sender, EventArgs e)
         {
@@ -162,7 +170,7 @@ namespace EVEDRI_Lab_Act2
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
                 // Open Form1 and pass the data
-                Form1 form1 = new Form1(dashboard); // if dashboard is available
+                Form1 form1 = new Form1(dashboard, "defaultUserName"); // if dashboard is available
                 form1.txtName.Text = row.Cells[0].Value?.ToString();
                 string gender = row.Cells[1].Value?.ToString();
                 if (gender == "Male") form1.rdoMale.Checked = true;
@@ -224,10 +232,130 @@ namespace EVEDRI_Lab_Act2
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1(dashboard);
+            Form1 form = new Form1(dashboard, "defaultUserName");
 
            form.Show();
             
+        }
+
+        private void btnSearchLogs_Click(object sender, EventArgs e)
+        {
+            //i removed the break 
+            dataGridView1.ClearSelection();
+            bool itemFound = false;
+
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    // Skip new row placeholder
+                    if (row.IsNewRow) continue;
+
+                    if (row.Cells[0].Value != null &&
+                        row.Cells[0].Value.ToString().IndexOf(txtSearch.Text.Trim(), StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        row.Selected = true;
+                        // Optional: Scroll to the first match only
+                        if (!itemFound)
+                        {
+                            dataGridView1.FirstDisplayedScrollingRowIndex = row.Index;
+                        }
+                        itemFound = true;
+                    }
+                }
+
+                if (!itemFound)
+                {
+                    MessageBox.Show("Item was not found in the list. Please try again.", "Search Failed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during search: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDeleteActive_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+
+                // Update status in DataGridView
+                dataGridView1.Rows[selectedIndex].Cells[14].Value = "0";
+
+                // Load the Excel file
+                Workbook book = new Workbook();
+                book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
+                Worksheet sheet = book.Worksheets[0];
+
+
+                string username = dataGridView1.Rows[selectedIndex].Cells[10].Value.ToString();
+
+                for (int i = 2; i <= sheet.LastRow; i++)
+                {
+                    if (sheet.Range[i, 9].Value == username)
+                    {
+                        sheet.Range[i, 14].Value = "0";
+                        break;
+                    }
+                }
+
+
+                // Save changes
+                book.SaveToFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
+
+                MessageBox.Show("Deleted. Status marked as '0'", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                logs logs = new logs();
+                logs.insertLogs(getUsername, "Deleted an active student");
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDeleteInactive_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+
+                // Update status in DataGridView
+                dataGridView1.Rows[selectedIndex].Cells[12].Value = "1";
+
+                // Load the Excel file
+                Workbook book = new Workbook();
+                book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
+                Worksheet sheet = book.Worksheets[0];
+
+
+                string username = dataGridView1.Rows[selectedIndex].Cells[10].Value.ToString();
+
+                for (int i = 2; i <= sheet.LastRow; i++)
+                {
+                    if (sheet.Range[i, 9].Value == username)
+                    {
+                        sheet.Range[i, 15].Value = "1";
+                        break;
+                    }
+                }
+
+
+                // Save changes
+                book.SaveToFile(@"C:\Users\GUSTAV\source\repos\ninel\Book1.xlsx");
+
+                MessageBox.Show("User activated. Status marked as '1'", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                logs logs = new logs();
+                logs.insertLogs(getUsername, "Deleted an inactive user");
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }
