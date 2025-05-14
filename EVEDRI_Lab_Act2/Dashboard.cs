@@ -71,37 +71,17 @@ namespace EVEDRI_Lab_Act2
         }*/
         public int showcount(int m, string val)
         {
-            //Workbook workbook = new Workbook();
-            //workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
-            //Worksheet sheet = workbook.Worksheets[0];
-            //int r = sheet.Rows.Length;
-            //int count = 0;
-
-            //for (int i = 2; i < r; i++)
-            //{
-            //    string cellValue = sheet.Range[i, m].Value;
-
-            //    // For hobby column (column 3), use Contains check
-            //    if (m == 3)
-            //    {
-            //        if (cellValue.Contains(val))
-            //            count++;
-            //    }
-            //    else
-            //    {
-            //        if (cellValue == val)
-            //            count++;
-            //    }
-            //}
             Workbook workbook = new Workbook();
             workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = workbook.Worksheets[0];
-            int r = sheet.Rows.Length;
+
+            int lastRow = sheet.LastRow + 1; // Because rows are 0-indexed
             int count = 0;
 
-            for (int i = 2; i < r; i++)
+            for (int i = 2; i <= lastRow; i++) // Start from row 2 (assuming row 1 is header)
             {
                 string cellValue = sheet.Range[i, m].Value;
+
                 if (m == 3)
                 {
                     if (cellValue.Contains(val))
@@ -113,7 +93,30 @@ namespace EVEDRI_Lab_Act2
                         count++;
                 }
             }
+
             return count;
+
+            /*        Workbook workbook = new Workbook();
+                    workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+                    Worksheet sheet = workbook.Worksheets[0];
+                    int r = sheet.Rows.Length;
+                    int count = 0;
+
+                    for (int i = 2; i < r; i++)
+                    {
+                        string cellValue = sheet.Range[i, m].Value;
+                        if (m == 3)
+                        {
+                            if (cellValue.Contains(val))
+                                count++;
+                        }
+                        else
+                        {
+                            if (cellValue == val)
+                                count++;
+                        }
+                    }
+                    return count;*/
         }
 
 
