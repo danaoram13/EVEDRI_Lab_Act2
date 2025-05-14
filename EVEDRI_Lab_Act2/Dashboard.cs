@@ -169,12 +169,13 @@ namespace EVEDRI_Lab_Act2
                     activeStudents.ImportRow(row);
                 }
             }
-
+           RefreshDashboardCounts();
             // Open Form2 and show filtered data
             Form2 f2 = new Form2(this, getUsername);
             f2.dataGridView1.DataSource = activeStudents;
             f2.Show();
             f2.btnAddNew.Visible = true;
+            f2.btnDeleteActive.Visible = true;
             this.Hide();
 
         }
@@ -204,6 +205,7 @@ namespace EVEDRI_Lab_Act2
             Form2 f2 = new Form2(this, getUsername);
             f2.dataGridView1.DataSource = activeStudents;
             f2.Show();
+            f2.btnDeleteInactive.Visible = true;
             this.Hide();
         }
 
@@ -216,6 +218,7 @@ namespace EVEDRI_Lab_Act2
             var f2 = new Form2(this, getUsername);
             ShowLogs(f2.dataGridView1);
             f2.btnSearchLogs.Visible = true;
+
             this.Hide();
             f2.Show();
         }

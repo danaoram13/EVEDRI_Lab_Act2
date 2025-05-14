@@ -123,60 +123,24 @@ namespace EVEDRI_Lab_Act2
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            /*int r = dataGridView1.CurrentCell.RowIndex;
-            Form1 form = (Form1)Application.OpenForms["Form1"];
-            form.txtName.Text = dataGridView1.Rows[r].Cells[0].Value.ToString();
-            string gender = dataGridView1.Rows[r].Cells[1].Value.ToString();
-            if (gender == "Male")
-            {
-                form.rdoMale.Checked = true;
-            }
-            else
-            {
-                form.rdoFemale.Checked = true;
-            }
-            string hobbies = dataGridView1.Rows[r].Cells[2].Value.ToString();
-            string[] h = hobbies.Split(',');
-            foreach (string val in h) 
-            {
-                if (val.Trim() == "Basketball")
-                {
-                    form.chkBasketball.Checked = true;
-                }
-                if (val.Trim() == "Volleyball")
-                {
-                    form.chkVolleyball.Checked = true;
-                }
-                if (val.Trim() == "Soccer")
-                {
-                    form.chkSoccer.Checked = true;
-                }
-            }
-            form.cmbFavColor.SelectedItem = dataGridView1.Rows[r].Cells[3].Value.ToString();
-            form.txtSaying.Text = dataGridView1.Rows[r].Cells[4].Value.ToString();
-            form.lblId.Text = r.ToString();
-
-            form.txtEmail.Text = dataGridView1.Rows[r].Cells[5].Value.ToString();
-            form.txtAge.Text = dataGridView1.Rows[r].Cells[7].Value.ToString();
-            form.txtName.Text = dataGridView1.Rows[r].Cells[8].Value.ToString();
-            form.txtPassword.Text = dataGridView1.Rows[r].Cells[9].Value.ToString();
-            form.txtSaying.Text = dataGridView1.Rows[r].Cells[10].Value.ToString();
-
-            form.btnAdd.Visible = false;
-            form.btnUpdate.Visible = true;*/
-
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
-                // Open Form1 and pass the data
-                Form1 form1 = new Form1(dashboard, "defaultUserName"); // if dashboard is available
+                // Try to get the already open Form1, or create a new one if not found
+                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                if (form1 == null)
+                {
+                    form1 = new Form1(dashboard, getUsername);
+                }
+
+                // Fill fields
                 form1.txtName.Text = row.Cells[0].Value?.ToString();
                 string gender = row.Cells[1].Value?.ToString();
-                if (gender == "Male") form1.rdoMale.Checked = true;
-                else if (gender == "Female") form1.rdoFemale.Checked = true;
+                form1.rdoMale.Checked = gender == "Male";
+                form1.rdoFemale.Checked = gender == "Female";
 
-                string hobbies = row.Cells[2].Value?.ToString();
+                string hobbies = row.Cells[2].Value?.ToString() ?? "";
                 form1.chkBasketball.Checked = hobbies.Contains("Basketball");
                 form1.chkVolleyball.Checked = hobbies.Contains("Volleyball");
                 form1.chkSoccer.Checked = hobbies.Contains("Soccer");
@@ -192,11 +156,15 @@ namespace EVEDRI_Lab_Act2
                 form1.cmbCourse.Text = row.Cells[11].Value?.ToString();
                 form1.txtProfile.Text = row.Cells[12].Value?.ToString();
 
-                // Store the row index for updating (subtract header)
-                form1.Controls["lblId"].Text = e.RowIndex.ToString();
+                // Store the row index for updating
+                form1.lblId.Text = e.RowIndex.ToString();
+
+                form1.btnAdd.Visible = false;
+                form1.btnUpdate.Visible = true;
 
                 form1.Show();
                 this.Hide();
+
             }
         }
 

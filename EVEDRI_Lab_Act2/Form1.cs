@@ -158,6 +158,7 @@ namespace EVEDRI_Lab_Act2
             form2.dataGridView1.DataSource = dt;
 
             RefreshDashboardData();
+           
 
             MessageBox.Show("Successfully added!", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -186,8 +187,8 @@ namespace EVEDRI_Lab_Act2
 
             //focus to name field
             txtName.Focus();
-            
-            
+
+
         }
 
         private void RefreshDashboardData()
@@ -363,6 +364,10 @@ namespace EVEDRI_Lab_Act2
        
             MessageBox.Show("Successfully updated!", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            logs logs = new logs();
+            getUsername = name;
+            logs.insertLogs(getUsername, $"Updated user: {name}");
+
             // Reset all fields
             txtName.Clear();
             rdoMale.Checked = false;
@@ -382,6 +387,12 @@ namespace EVEDRI_Lab_Act2
             txtProfile.Clear();
 
             txtName.Focus();
+
+        /*    book.SaveToFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+
+            // Update DataGridView in Form2
+            form2.LoadExcelFile();*/
+
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -441,7 +452,7 @@ namespace EVEDRI_Lab_Act2
             this.Close();
             dashboard.ShowDialog();
 */
-            this.Close();           // Close Form1
+            this.Hide();           // Close Form1
             dashboard.Show();
         }
     }

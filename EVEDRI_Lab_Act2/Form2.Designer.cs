@@ -154,22 +154,28 @@
             // 
             // btnDeleteActive
             // 
-            this.btnDeleteActive.Location = new System.Drawing.Point(245, 548);
+            this.btnDeleteActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteActive.Location = new System.Drawing.Point(130, 511);
             this.btnDeleteActive.Name = "btnDeleteActive";
             this.btnDeleteActive.Size = new System.Drawing.Size(109, 31);
             this.btnDeleteActive.TabIndex = 9;
-            this.btnDeleteActive.Text = "Delete Act";
+            this.btnDeleteActive.Text = "Delete";
             this.btnDeleteActive.UseVisualStyleBackColor = true;
+            this.btnDeleteActive.Visible = false;
             this.btnDeleteActive.Click += new System.EventHandler(this.btnDeleteActive_Click);
             // 
             // btnDeleteInactive
             // 
-            this.btnDeleteInactive.Location = new System.Drawing.Point(130, 548);
+            this.btnDeleteInactive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteInactive.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteInactive.Location = new System.Drawing.Point(130, 511);
             this.btnDeleteInactive.Name = "btnDeleteInactive";
             this.btnDeleteInactive.Size = new System.Drawing.Size(109, 31);
             this.btnDeleteInactive.TabIndex = 10;
-            this.btnDeleteInactive.Text = "Delete Inact";
+            this.btnDeleteInactive.Text = "Delete";
             this.btnDeleteInactive.UseVisualStyleBackColor = true;
+            this.btnDeleteInactive.Visible = false;
             this.btnDeleteInactive.Click += new System.EventHandler(this.btnDeleteInactive_Click);
             // 
             // Form2
@@ -211,7 +217,7 @@
         public System.Windows.Forms.Button btnDeleteAll;
         public System.Windows.Forms.Button btnAddNew;
         public System.Windows.Forms.Button btnSearchLogs;
-        private System.Windows.Forms.Button btnDeleteActive;
-        private System.Windows.Forms.Button btnDeleteInactive;
+        public System.Windows.Forms.Button btnDeleteActive;
+        public System.Windows.Forms.Button btnDeleteInactive;
     }
 }
