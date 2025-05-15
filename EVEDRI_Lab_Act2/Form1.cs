@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -55,6 +56,11 @@ namespace EVEDRI_Lab_Act2
             if (txtAge.Text.Any(char.IsLetter))
             {
                 MessageBox.Show("Error, you can't put letters in your age, No Letters allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -127,7 +133,7 @@ namespace EVEDRI_Lab_Act2
 
             Workbook book = new Workbook();
 
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
 
@@ -151,7 +157,7 @@ namespace EVEDRI_Lab_Act2
             //UNSURE OF THIS
             sheet.Range[row, 14].Value = "1";
 
-            book.SaveToFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+            book.SaveToFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
 
             DataTable dt = sheet.ExportDataTable();
 
@@ -194,7 +200,7 @@ namespace EVEDRI_Lab_Act2
         private void RefreshDashboardData()
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
             int rowCount = sheet.Rows.Length;
@@ -248,9 +254,15 @@ namespace EVEDRI_Lab_Act2
         {            
            form2.Show();                     
         }
-
+        private bool IsValidEmail(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, pattern);
+        }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            
+            
             // Check for required fields
             if (string.IsNullOrWhiteSpace(txtName.Text) ||
                 string.IsNullOrWhiteSpace(txtAge.Text) ||
@@ -301,6 +313,11 @@ namespace EVEDRI_Lab_Act2
                 MessageBox.Show("Email already exists. Please use a different one.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Collect values
             string name = txtName.Text.Trim();
@@ -334,7 +351,7 @@ namespace EVEDRI_Lab_Act2
 
             // Load workbook
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = book.Worksheets[0];
 
             // Update Excel sheet
@@ -354,7 +371,7 @@ namespace EVEDRI_Lab_Act2
             sheet.Range[row, 14].Value = "1"; // Assuming this marks the row as active
 
             // Save changes
-            book.SaveToFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
+            book.SaveToFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx", ExcelVersion.Version2016);
 
             // Update DataGridView
             DataTable dt = sheet.ExportDataTable();
@@ -416,7 +433,7 @@ namespace EVEDRI_Lab_Act2
         private bool IsUsernameAndPasswordExist(string username, string password)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = book.Worksheets[0];
 
             DataTable dt = sheet.ExportDataTable(sheet.AllocatedRange, true, true);
@@ -433,7 +450,7 @@ namespace EVEDRI_Lab_Act2
         private bool IsEmailExist(string email)
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = book.Worksheets[0];
             DataTable dt = sheet.ExportDataTable(sheet.AllocatedRange, true, true);
             foreach (DataRow row in dt.Rows)

@@ -72,7 +72,7 @@ namespace EVEDRI_Lab_Act2
         public int showcount(int m, string val)
         {
             Workbook workbook = new Workbook();
-            workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            workbook.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = workbook.Worksheets[0];
 
             int lastRow = sheet.LastRow + 1; // Because rows are 0-indexed
@@ -124,7 +124,7 @@ namespace EVEDRI_Lab_Act2
         public void ShowLogs(DataGridView D)
         {
             Workbook workbook = new Workbook();
-            workbook.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            workbook.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = workbook.Worksheets[1];
             DataTable dt = sheet.ExportDataTable();
             D.DataSource = dt;
@@ -154,7 +154,7 @@ namespace EVEDRI_Lab_Act2
         {
             // Load Excel file
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = book.Worksheets[0];
 
             // Export data table with headers
@@ -185,7 +185,7 @@ namespace EVEDRI_Lab_Act2
            
             // Load Excel file
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
             Worksheet sheet = book.Worksheets[0];
 
             // Export data table with headers

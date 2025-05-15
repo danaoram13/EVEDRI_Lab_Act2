@@ -30,7 +30,7 @@ namespace EVEDRI_Lab_Act2
         public void LoadExcelFile()
         {
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
 
             Worksheet sheet = book.Worksheets[0];
@@ -311,7 +311,7 @@ namespace EVEDRI_Lab_Act2
             if (confirm != DialogResult.Yes) return;
 
             // Load Excel file
-            string path = @"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx";
+            string path = @"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx";
             Workbook book = new Workbook();
             book.LoadFromFile(path);
             Worksheet sheet = book.Worksheets[0];
@@ -369,7 +369,7 @@ namespace EVEDRI_Lab_Act2
                                                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes) return;
 
-            string filePath = @"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx";
+            string filePath = @"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx";
             Workbook book = new Workbook();
             book.LoadFromFile(filePath);
             Worksheet sheet = book.Worksheets[0];

@@ -38,7 +38,7 @@ namespace EVEDRI_Lab_Act2
 
 
             Workbook book = new Workbook();
-            book.LoadFromFile(@"C:\Users\GUSTAV\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
+            book.LoadFromFile(@"C:\Users\ACT-STUDENT\source\repos\EVEDRI_Lab_Act2\Book1.xlsx");
 
             Worksheet sheet = book.Worksheets[0];
             int row = sheet.Rows.Length;
